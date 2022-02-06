@@ -1,5 +1,4 @@
 from tkinter import *
-import tkinter as tk
 import random
 import constants
 win = Tk()
@@ -35,11 +34,11 @@ def whenClicked():
     totalClicks = totalClicks + 1
     if totalClicks % 2 == 0:
         button.config(
-        image= PhotoImage(file=constants.clickButton)
+        image= click_btn
     )
     else:
         button.config(
-            image= PhotoImage(file=constants.clickedButton)
+            image=clicked_btn
     )
 #sets which direction out of 16 possible for the button to drift
 def changeValues():
@@ -52,14 +51,23 @@ def changeValues():
      buttonY = random.randint(-2,2)*constants.speedMult
      win.after(random.randint(250,1000), changeValues)
 
+#Import the image using PhotoImage function
+click_btn= PhotoImage(file=constants.clickButton)
+clicked_btn= PhotoImage(file=constants.clickedButton)
+
 #creates the button
-button = tk.Button(text="Click!", 
+button = Button(
+    win,
+    text="Click!", 
     command=whenClicked,
-    bg="#0B090A",
-    activebackground="#0B090A",
-    borderwidth=0,
-    image= PhotoImage(file=constants.clickButton)
+    bg= constants.winBackground,
+    activebackground= constants.winBackground,
+    borderwidth=10,
+    image=click_btn,
+    # image= PhotoImage(file=constants.clickButton)
     )
+button.pack(side = TOP)
+
 
 def onTick(): #tick every 10ms
     global buttonX
